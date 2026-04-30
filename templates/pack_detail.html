@@ -1,0 +1,15 @@
+<h1>{{ pack.title }}</h1>
+
+{% if pack.image %}
+    <img src="{{ pack.image.url }}" width="300">
+{% endif %}
+
+<p><strong>Club:</strong> {{ pack.club }}</p>
+<p><strong>League:</strong> {{ pack.league }}</p>
+<p><strong>Price:</strong> £{{ pack.price }}</p>
+
+<h2>Description</h2>
+<p>{{ pack.description }}</p>
+
+<h2>Itinerary</h2>
+<p>{{ pack.itinerary|linebreaks }}</p>

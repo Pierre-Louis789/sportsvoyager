@@ -1,0 +1,18 @@
+<h1>Sports Voyager Packs</h1>
+
+{% for pack in packs %}
+    <div style="margin-bottom: 20px;">
+        <h2>
+            <a href="{% url 'pack_detail' pack.pk %}">
+                {{ pack.title }}
+            </a>
+        </h2>
+
+        {% if pack.image %}
+            <img src="{{ pack.image.url }}" width="200">
+        {% endif %}
+
+        <p>{{ pack.description|truncatewords:20 }}</p>
+        <p><strong>£{{ pack.price }}</strong></p>
+    </div>
+{% endfor %}
