@@ -14,6 +14,21 @@
     </div>
 </div>
 
+<!-- SEARCH BAR -->
+<form method="GET" class="mb-5">
+    <div class="input-group">
+        <input 
+            type="text" 
+            name="q" 
+            class="form-control" 
+            placeholder="Search by club, league, or keyword..."
+            value="{{ query }}"
+        >
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+
 <!-- HOW IT WORKS -->
 <h2 class="mt-5 mb-3">How It Works</h2>
 <div class="row text-center mb-5">
@@ -35,20 +50,25 @@
 <h2 id="packs" class="mb-4">Available Packs</h2>
 
 <div class="row">
-    {% for pack in packs %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                {% if pack.image %}
-                    <img src="{{ pack.image.url }}" class="card-img-top" alt="{{ pack.title }}">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ pack.title }}</h5>
-                    <p class="card-text">{{ pack.description|truncatewords:20 }}</p>
-                    <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-primary">View Pack</a>
+    {% if packs %}
+        {% for pack in packs %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if pack.image %}
+                        <img src="{{ pack.image.url }}" class="card-img-top" alt="{{ pack.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ pack.title }}</h5>
+                        <p class="card-text">{{ pack.description|truncatewords:20 }}</p>
+                        <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-primary">View Pack</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No packs found. Try another search.</p>
+    {% endif %}
 </div>
+
 
 {% endblock %}
