@@ -67,8 +67,26 @@
 
 <!-- ITINERARY -->
 <h2 class="mb-3">Itinerary</h2>
-<div class="bg-white p-4 rounded shadow-sm border">
-    <p class="mb-0" style="white-space: pre-line;">{{ pack.itinerary }}</p>
-</div>
+
+{% if unlocked %}
+    <!-- FULL PREMIUM ITINERARY -->
+    <div class="bg-white p-4 rounded shadow-sm border">
+        <p class="mb-0" style="white-space: pre-line;">{{ pack.itinerary }}</p>
+    </div>
+{% else %}
+    <!-- LOCKED VERSION -->
+    <div class="bg-white p-4 rounded shadow-sm border position-relative">
+        <p class="mb-0 text-muted" style="white-space: pre-line;">
+            {{ pack.teaser }}
+        </p>
+
+        <div class="locked-overlay"></div>
+    </div>
+
+    <a href="{% url 'unlock_pack' pack.pk %}" class="btn btn-warning btn-lg mt-4 w-100">
+        Unlock Full Pack 🔓
+    </a>
+{% endif %}
+
 
 {% endblock %}

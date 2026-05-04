@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.db import models
 from .models import Pack
 
 def pack_list(request):
@@ -22,4 +23,13 @@ def pack_list(request):
 
 def pack_detail(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
-    return render(request, 'pack_detail.html', {'pack': pack})
+    unlocked = request.session.get(f"unlocked_{pk}", False)
+
+    return render(request, 'pack_detail.html', {
+        'pack': pack,
+        'unlocked': unlocked
+    })
+
+def unlock_pack(request, pk):
+    request.session[f"unlocked_{pk}"] = True
+    return redirect('pack_detail', pk=pk)
