@@ -37,6 +37,34 @@
     </ul>
 </div>
 
+<!-- BOOKING BUTTONS -->
+<div class="mt-4">
+    {% if pack.flight_link %}
+        <a href="{{ pack.flight_link }}" target="_blank" class="btn btn-primary mb-2 w-100">
+            Book Flights ✈️
+        </a>
+    {% endif %}
+
+    {% if pack.hotel_link %}
+        <a href="{{ pack.hotel_link }}" target="_blank" class="btn btn-success mb-2 w-100">
+            Book Hotel 🏨
+        </a>
+    {% endif %}
+
+    {% if pack.ticket_link %}
+        <a href="{{ pack.ticket_link }}" target="_blank" class="btn btn-warning mb-2 w-100">
+            Buy Match Tickets 🎟️
+        </a>
+    {% endif %}
+
+    {% if pack.tour_link %}
+        <a href="{{ pack.tour_link }}" target="_blank" class="btn btn-info mb-2 w-100">
+            Stadium Tour 🏟️
+        </a>
+    {% endif %}
+</div>
+
+
 <!-- ITINERARY -->
 <h2 class="mb-3">Itinerary</h2>
 <div class="bg-white p-4 rounded shadow-sm border">
