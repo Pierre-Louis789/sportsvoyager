@@ -6,8 +6,8 @@ class PackAdmin(admin.ModelAdmin):
     search_fields = ('title', 'club', 'league')
     list_filter = ('league',)
     fields = (
-        'title', 'club', 'league', 'description', 'itinerary', 'price', 'image',
-        'flight_link', 'hotel_link', 'ticket_link', 'tour_link'
+        'title', 'club', 'league', 'description', 'teaser', 'itinerary', 'price', 'image',
+        'flight_link', 'hotel_link', 'ticket_link', 'tour_link', 'is_premium'
     )
 
 admin.site.register(Pack, PackAdmin)
