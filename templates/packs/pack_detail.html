@@ -2,104 +2,288 @@
 
 {% block content %}
 
-<!-- HEADER SECTION -->
-<div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-        {% if pack.image %}
-            <img src="{{ pack.image.url }}" class="img-fluid rounded shadow-soft" alt="{{ pack.title }}">
-        {% endif %}
-    </div>
+<div class="row">
 
-    <div class="col-md-6">
-        <h1 class="fw-bold display-6">{{ pack.title }}</h1>
-        <p class="text-muted fs-5">{{ pack.club }} — {{ pack.league }}</p>
+    <!-- SIDEBAR (only visible if unlocked) -->
+    {% if unlocked or not pack.is_premium %}
+    <div class="col-md-3 d-none d-md-block">
+    <div class="position-sticky" style="top: 100px;">
+        <div class="card shadow-soft p-3 quick-nav">
 
-        {% if pack.is_premium %}
-            <span class="badge bg-warning text-dark mb-3">Premium Pack</span>
-        {% endif %}
+            <h5 class="fw-bold mb-3">Quick Navigation</h5>
 
-        <h3 class="fw-bold text-primary mb-4">£{{ pack.price }}</h3>
+            <div class="section-label">Trip Essentials</div>
+            <a href="#stadium"><i class="bi bi-geo-alt-fill"></i> Stadium</a>
+            <a href="#city"><i class="bi bi-building"></i> City Tips</a>
+            <a href="#timeline"><i class="bi bi-clock-history"></i> Timeline</a>
 
-        <p class="fs-5">{{ pack.description }}</p>
+            <div class="section-label">Where to Stay & Go</div>
+            <a href="#hotel"><i class="bi bi-house-door-fill"></i> Hotels</a>
+            <a href="#food"><i class="bi bi-cup-straw"></i> Food & Bars</a>
+            <a href="#experiences"><i class="bi bi-stars"></i> Experiences</a>
 
-        <a href="{% url 'pack_list' %}" class="btn btn-outline-dark mt-4">← Back to Packs</a>
+            <div class="section-label">Logistics</div>
+            <a href="#transport"><i class="bi bi-train-front-fill"></i> Transport</a>
+            <a href="#budget"><i class="bi bi-cash-stack"></i> Budget</a>
+            <a href="#safety"><i class="bi bi-shield-check"></i> Safety</a>
+
+            <div class="section-label">Extras</div>
+            <a href="#map"><i class="bi bi-map-fill"></i> Map</a>
+            <a href="#emergency"><i class="bi bi-exclamation-triangle-fill"></i> Emergency</a>
+
+        </div>
     </div>
 </div>
 
-<!-- WHAT'S INCLUDED -->
-<div class="p-4 rounded shadow-soft bg-soft mb-5">
-    <h3 class="fw-bold mb-3">What’s Included</h3>
-    <ul class="fs-5">
-        <li>Full weekend itinerary</li>
-        <li>Stadium guide & entrances</li>
-        <li>Hotel recommendations</li>
-        <li>Flight suggestions</li>
-        <li>Best pubs & food spots</li>
-        <li>Transport routes & tips</li>
-        <li>Safety notes & local advice</li>
-    </ul>
-</div>
+    {% endif %}
 
-<!-- BOOKING LINKS -->
-<h2 class="fw-bold mb-3">Booking & Recommendations</h2>
+    <!-- MAIN CONTENT -->
+    <div class="{% if unlocked or not pack.is_premium %}col-md-9{% else %}col-md-12{% endif %}">
 
-{% if unlocked or not pack.is_premium %}
-    <div class="mt-4">
-        {% if pack.flight_link %}
-            <a href="{{ pack.flight_link }}" target="_blank" class="btn btn-primary mb-2 w-100">
-                ✈️ Book Flights
-            </a>
-        {% endif %}
+        <!-- HEADER SECTION -->
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-6">
+                {% if pack.image %}
+                    <img src="{{ pack.image.url }}" class="img-fluid rounded shadow-soft" alt="{{ pack.title }}">
+                {% endif %}
+            </div>
 
-        {% if pack.hotel_link %}
-            <a href="{{ pack.hotel_link }}" target="_blank" class="btn btn-success mb-2 w-100">
-                🏨 Book Hotel
-            </a>
-        {% endif %}
+            <div class="col-md-6">
+                <h1 class="fw-bold display-6">{{ pack.title }}</h1>
+                <p class="text-muted fs-5">{{ pack.club }} — {{ pack.league }}</p>
 
-        {% if pack.ticket_link %}
-            <a href="{{ pack.ticket_link }}" target="_blank" class="btn btn-warning mb-2 w-100">
-                🎟️ Buy Match Tickets
-            </a>
-        {% endif %}
+                {% if pack.is_premium %}
+                    <span class="badge bg-warning text-dark mb-3">Premium Pack</span>
+                {% endif %}
 
-        {% if pack.tour_link %}
-            <a href="{{ pack.tour_link }}" target="_blank" class="btn btn-info mb-2 w-100">
-                🏟️ Stadium Tour
-            </a>
-        {% endif %}
+                <h3 class="fw-bold text-primary mb-4">£{{ pack.price }}</h3>
+
+                <p class="fs-5">{{ pack.description }}</p>
+
+                <a href="{% url 'pack_list' %}" class="btn btn-outline-dark mt-4">← Back to Packs</a>
+            </div>
+        </div>
+
+<div class="section-divider"></div>
+
+<!-- 🔒 LOCKED VERSION -->
+{% if not unlocked and pack.is_premium %}
+
+    <!-- WHAT YOU GET SUMMARY (only for locked users) -->
+    <div class="card shadow-soft p-4 mb-4">
+        <h4 class="fw-bold mb-3">What You Get</h4>
+        <ul class="fs-5">
+            <li>Full weekend itinerary</li>
+            <li>Stadium guide & entrances</li>
+            <li>Hotel recommendations</li>
+            <li>Flight suggestions</li>
+            <li>Best pubs & food spots</li>
+            <li>Transport routes & tips</li>
+            <li>Safety notes & local advice</li>
+            <li>Local attractions & experiences</li>
+            <li>Match‑day map & navigation</li>
+            <li>Emergency contacts</li>
+        </ul>
     </div>
-{% else %}
+
     <div class="locked-box position-relative p-4 rounded shadow-soft bg-white mb-4">
         <div class="blur-overlay"></div>
+
         <div class="position-absolute top-50 start-50 translate-middle text-center">
             <span class="fs-1">🔒</span>
-            <p class="text-muted mt-2">Unlock to view booking links</p>
+            <p class="text-muted mt-2">Unlock this pack to view the full travel guide</p>
         </div>
-        <p class="text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
-    </div>
-{% endif %}
 
-<!-- ITINERARY -->
-<h2 class="fw-bold mt-5 mb-3">Itinerary</h2>
-
-{% if unlocked or not pack.is_premium %}
-    <div class="p-4 rounded shadow-soft bg-white">
-        <p class="fs-5" style="white-space: pre-line;">{{ pack.itinerary }}</p>
-    </div>
-{% else %}
-    <div class="locked-box position-relative p-4 rounded shadow-soft bg-white">
-        <div class="blur-overlay"></div>
-        <div class="position-absolute top-50 start-50 translate-middle text-center">
-            <span class="fs-1">🔒</span>
-            <p class="text-muted mt-2">Unlock to view full itinerary</p>
-        </div>
         <p class="text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
     </div>
 
     <a href="{% url 'unlock_pack' pack.pk %}" class="btn btn-premium btn-lg w-100 mt-4">
         Unlock Full Pack 🔓
     </a>
-{% endif %}
+
+{% else %}
+
+
+        <!-- 🔓 UNLOCKED VERSION (FULL PREMIUM CONTENT) -->
+
+        <!-- STADIUM INFORMATION -->
+        <div id="stadium" class="card shadow-soft mb-5">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-geo-alt-fill text-warning"></i> Stadium Information</h3>
+                <p class="fs-5 mb-3"><strong>Stadium:</strong> {{ pack.stadium_name }}</p>
+                <p class="fs-5 mb-3"><strong>Capacity:</strong> {{ pack.stadium_capacity }}</p>
+                <p class="fs-5 mb-3"><strong>Location:</strong> {{ pack.stadium_location }}</p>
+                <p class="fs-5 mb-3"><strong>Atmosphere:</strong> {{ pack.stadium_atmosphere }}</p>
+                <p class="fs-5 mb-0">{{ pack.stadium_description }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- CITY TRAVEL TIPS -->
+        <div id="city" class="card shadow-soft mb-5 bg-soft">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-building text-warning"></i> City Travel Tips</h3>
+                <p class="fs-5 mb-3"><strong>Best Areas to Stay:</strong> {{ pack.city_best_areas }}</p>
+                <p class="fs-5 mb-3"><strong>Local Food to Try:</strong> {{ pack.city_food }}</p>
+                <p class="fs-5 mb-3"><strong>Nightlife & Bars:</strong> {{ pack.city_nightlife }}</p>
+                <p class="fs-5 mb-0">{{ pack.city_tips }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- MATCH-DAY TIMELINE -->
+        <div id="timeline" class="card shadow-soft mb-5">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-clock-history text-warning"></i> Match‑Day Timeline</h3>
+                {% for entry in pack.timeline_entries.all %}
+                    <div class="mb-4">
+                        <div class="fw-bold text-primary fs-5">{{ entry.time }}</div>
+                        <div class="fs-5">{{ entry.description }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- HOTEL -->
+        <div id="hotel" class="card shadow-soft mb-5 bg-soft">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-house-door-fill text-warning"></i> Hotel & Area Recommendations</h3>
+                <p class="fs-5 mb-3"><strong>Recommended Hotel:</strong> {{ pack.hotel_recommendation }}</p>
+                <p class="fs-5 mb-3"><strong>Best Area to Stay:</strong> {{ pack.hotel_area }}</p>
+                <p class="fs-5 mb-3"><strong>Why This Area:</strong> {{ pack.hotel_area_reason }}</p>
+                <p class="fs-5 mb-0">{{ pack.hotel_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- TRANSPORT -->
+        <div id="transport" class="card shadow-soft mb-5">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-train-front-fill text-warning"></i> Transport Guide</h3>
+                <p class="fs-5 mb-3"><strong>Airport to City:</strong> {{ pack.transport_airport }}</p>
+                <p class="fs-5 mb-3"><strong>Getting Around the City:</strong> {{ pack.transport_city }}</p>
+                <p class="fs-5 mb-3"><strong>Getting to the Stadium:</strong> {{ pack.transport_stadium }}</p>
+                <p class="fs-5 mb-0">{{ pack.transport_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- FOOD -->
+        <div id="food" class="card shadow-soft mb-5 bg-soft">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-cup-straw text-warning"></i> Food & Bars Recommendations</h3>
+                <p class="fs-5 mb-3"><strong>Best Local Food:</strong> {{ pack.food_local }}</p>
+                <p class="fs-5 mb-3"><strong>Recommended Restaurants:</strong> {{ pack.food_restaurants }}</p>
+                <p class="fs-5 mb-3"><strong>Best Bars & Pubs:</strong> {{ pack.food_bars }}</p>
+                <p class="fs-5 mb-0">{{ pack.food_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- EXPERIENCES -->
+        <div id="experiences" class="card shadow-soft mb-5 bg-soft">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-stars text-warning"></i> Local Experiences</h3>
+                <p class="fs-5 mb-3"><strong>Top Attractions:</strong> {{ pack.experiences_attractions }}</p>
+                <p class="fs-5 mb-3"><strong>Stadium Tours:</strong> {{ pack.experiences_football }}</p>
+                <p class="fs-5 mb-3"><strong>Nightlife & Entertainment:</strong> {{ pack.experiences_nightlife }}</p>
+                <p class="fs-5 mb-0">{{ pack.experiences_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- BUDGET -->
+        <div id="budget" class="card shadow-soft mb-5">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-cash-stack text-warning"></i> Budget Breakdown</h3>
+                <p class="fs-5 mb-3"><strong>Estimated Flights:</strong> {{ pack.budget_flights }}</p>
+                <p class="fs-5 mb-3"><strong>Hotel (per night):</strong> {{ pack.budget_hotel }}</p>
+                <p class="fs-5 mb-3"><strong>Match Tickets:</strong> {{ pack.budget_tickets }}</p>
+                <p class="fs-5 mb-3"><strong>Food & Drinks:</strong> {{ pack.budget_food }}</p>
+                <p class="fs-5 mb-3"><strong>Transport:</strong> {{ pack.budget_transport }}</p>
+                <p class="fs-5 mb-0">{{ pack.budget_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SAFETY -->
+        <div id="safety" class="card shadow-soft mb-5">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-shield-check text-warning"></i> Safety Tips</h3>
+                <p class="fs-5 mb-3"><strong>General Safety:</strong> {{ pack.safety_general }}</p>
+                <p class="fs-5 mb-3"><strong>Match‑Day Safety:</strong> {{ pack.safety_matchday }}</p>
+                <p class="fs-5 mb-3"><strong>Areas to Avoid:</strong> {{ pack.safety_areas }}</p>
+                <p class="fs-5 mb-0">{{ pack.safety_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- MAP -->
+        <div id="map" class="card shadow-soft mb-5">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-map-fill text-warning"></i> Match‑Day Map</h3>
+                <p class="fs-5 mb-3"><strong>Stadium Location:</strong> {{ pack.map_stadium }}</p>
+                <p class="fs-5 mb-3"><strong>Nearest Metro:</strong> {{ pack.map_transport }}</p>
+                <p class="fs-5 mb-3"><strong>Pre‑Match Pub:</strong> {{ pack.map_pub }}</p>
+                <p class="fs-5 mb-3"><strong>Hotel Area:</strong> {{ pack.map_hotel_area }}</p>
+                <p class="fs-5 mb-0">{{ pack.map_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- EMERGENCY -->
+        <div id="emergency" class="card shadow-soft mb-5 bg-soft">
+            <div class="card-body p-4">
+                <h3 class="fw-bold mb-3"><i class="bi bi-exclamation-triangle-fill text-warning"></i> Emergency & Useful Contacts</h3>
+                <p class="fs-5 mb-3"><strong>Emergency Number:</strong> {{ pack.contact_emergency }}</p>
+                <p class="fs-5 mb-3"><strong>Local Police:</strong> {{ pack.contact_police }}</p>
+                <p class="fs-5 mb-3"><strong>Taxi Hotline:</strong> {{ pack.contact_taxi }}</p>
+                <p class="fs-5 mb-3"><strong>Stadium Security:</strong> {{ pack.contact_stadium }}</p>
+                <p class="fs-5 mb-0">{{ pack.contact_notes }}</p>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- BOOKING LINKS -->
+        <h2 class="fw-bold mb-3">Booking & Recommendations</h2>
+
+        <div class="mt-4">
+            {% if pack.flight_link %}
+                <a href="{{ pack.flight_link }}" target="_blank" class="btn btn-primary mb-2 w-100">✈️ Book Flights</a>
+            {% endif %}
+            {% if pack.hotel_link %}
+                <a href="{{ pack.hotel_link }}" target="_blank" class="btn btn-success mb-2 w-100">🏨 Book Hotel</a>
+            {% endif %}
+            {% if pack.ticket_link %}
+                <a href="{{ pack.ticket_link }}" target="_blank" class="btn btn-warning mb-2 w-100">🎟️ Buy Match Tickets</a>
+            {% endif %}
+            {% if pack.tour_link %}
+                <a href="{{ pack.tour_link }}" target="_blank" class="btn btn-info mb-2 w-100">🏟️ Stadium Tour</a>
+            {% endif %}
+        </div>
+
+        <!-- ITINERARY -->
+        <h2 class="fw-bold mt-5 mb-3">Itinerary</h2>
+
+        <div class="card shadow-soft p-4">
+            <p class="fs-5" style="white-space: pre-line;">{{ pack.itinerary }}</p>
+        </div>
+
+        {% endif %} <!-- END LOCK CHECK -->
+
+    </div>
+</div>
 
 {% endblock %}
