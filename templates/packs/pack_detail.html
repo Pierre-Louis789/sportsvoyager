@@ -2,33 +2,36 @@
 
 {% block content %}
 
-<div class="row mb-5">
+<!-- HEADER SECTION -->
+<div class="row mb-5 align-items-center">
     <div class="col-md-6">
         {% if pack.image %}
-            <img src="{{ pack.image.url }}" class="img-fluid rounded shadow-sm mb-4" alt="{{ pack.title }}">
+            <img src="{{ pack.image.url }}" class="img-fluid rounded shadow-soft" alt="{{ pack.title }}">
         {% endif %}
     </div>
 
-    <div class="col-md-6 d-flex flex-column justify-content-center">
-        <h1 class="fw-bold mb-3">{{ pack.title }}</h1>
+    <div class="col-md-6">
+        <h1 class="fw-bold display-6">{{ pack.title }}</h1>
+        <p class="text-muted fs-5">{{ pack.club }} — {{ pack.league }}</p>
 
-        <p class="text-muted mb-1"><strong>Club:</strong> {{ pack.club }}</p>
-        <p class="text-muted mb-3"><strong>League:</strong> {{ pack.league }}</p>
+        {% if pack.is_premium %}
+            <span class="badge bg-warning text-dark mb-3">Premium Pack</span>
+        {% endif %}
 
-        <h3 class="text-primary fw-bold mb-4">£{{ pack.price }}</h3>
+        <h3 class="fw-bold text-primary mb-4">£{{ pack.price }}</h3>
 
         <p class="fs-5">{{ pack.description }}</p>
 
-        <a href="/" class="btn btn-outline-secondary mt-4">← Back to Packs</a>
+        <a href="{% url 'pack_list' %}" class="btn btn-outline-dark mt-4">← Back to Packs</a>
     </div>
 </div>
 
 <!-- WHAT'S INCLUDED -->
-<div class="bg-light p-4 rounded shadow-sm mb-5">
-    <h3 class="mb-3">What’s Included</h3>
-    <ul class="mb-0">
+<div class="p-4 rounded shadow-soft bg-soft mb-5">
+    <h3 class="fw-bold mb-3">What’s Included</h3>
+    <ul class="fs-5">
         <li>Full weekend itinerary</li>
-        <li>Stadium guide & best entrances</li>
+        <li>Stadium guide & entrances</li>
         <li>Hotel recommendations</li>
         <li>Flight suggestions</li>
         <li>Best pubs & food spots</li>
@@ -38,59 +41,63 @@
 </div>
 
 <!-- BOOKING LINKS -->
-<h2 class="mb-3">Booking & Recommendations</h2>
+<h2 class="fw-bold mb-3">Booking & Recommendations</h2>
 
 {% if unlocked or not pack.is_premium %}
     <div class="mt-4">
         {% if pack.flight_link %}
             <a href="{{ pack.flight_link }}" target="_blank" class="btn btn-primary mb-2 w-100">
-                Book Flights ✈️
+                ✈️ Book Flights
             </a>
         {% endif %}
 
         {% if pack.hotel_link %}
             <a href="{{ pack.hotel_link }}" target="_blank" class="btn btn-success mb-2 w-100">
-                Book Hotel 🏨
+                🏨 Book Hotel
             </a>
         {% endif %}
 
         {% if pack.ticket_link %}
             <a href="{{ pack.ticket_link }}" target="_blank" class="btn btn-warning mb-2 w-100">
-                Buy Match Tickets 🎟️
+                🎟️ Buy Match Tickets
             </a>
         {% endif %}
 
         {% if pack.tour_link %}
             <a href="{{ pack.tour_link }}" target="_blank" class="btn btn-info mb-2 w-100">
-                Stadium Tour 🏟️
+                🏟️ Stadium Tour
             </a>
         {% endif %}
     </div>
 {% else %}
-    <div class="bg-white p-4 rounded shadow-sm border position-relative overflow-hidden" style="min-height: 180px;">
+    <div class="locked-box position-relative p-4 rounded shadow-soft bg-white mb-4">
         <div class="blur-overlay"></div>
-        <p class="mb-0 text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
+        <div class="position-absolute top-50 start-50 translate-middle text-center">
+            <span class="fs-1">🔒</span>
+            <p class="text-muted mt-2">Unlock to view booking links</p>
+        </div>
+        <p class="text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
     </div>
-
-    <a href="{% url 'unlock_pack' pack.pk %}" class="btn btn-warning btn-lg mt-4 w-100">
-        Unlock Full Pack 🔓
-    </a>
 {% endif %}
 
 <!-- ITINERARY -->
-<h2 class="mt-5 mb-3">Itinerary</h2>
+<h2 class="fw-bold mt-5 mb-3">Itinerary</h2>
 
 {% if unlocked or not pack.is_premium %}
-    <div class="bg-white p-4 rounded shadow-sm border">
-        <p class="mb-0" style="white-space: pre-line;">{{ pack.itinerary }}</p>
+    <div class="p-4 rounded shadow-soft bg-white">
+        <p class="fs-5" style="white-space: pre-line;">{{ pack.itinerary }}</p>
     </div>
 {% else %}
-    <div class="bg-white p-4 rounded shadow-sm border position-relative overflow-hidden" style="min-height: 180px;">
+    <div class="locked-box position-relative p-4 rounded shadow-soft bg-white">
         <div class="blur-overlay"></div>
-        <p class="mb-0 text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
+        <div class="position-absolute top-50 start-50 translate-middle text-center">
+            <span class="fs-1">🔒</span>
+            <p class="text-muted mt-2">Unlock to view full itinerary</p>
+        </div>
+        <p class="text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
     </div>
 
-    <a href="{% url 'unlock_pack' pack.pk %}" class="btn btn-warning btn-lg mt-4 w-100">
+    <a href="{% url 'unlock_pack' pack.pk %}" class="btn btn-premium btn-lg w-100 mt-4">
         Unlock Full Pack 🔓
     </a>
 {% endif %}

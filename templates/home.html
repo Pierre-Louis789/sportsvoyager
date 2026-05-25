@@ -3,40 +3,55 @@
 {% block content %}
 
 <!-- HERO SECTION -->
-<div class="p-5 mb-5 bg-dark text-white rounded shadow">
-    <h1 class="fw-bold display-5">Plan Your Football Weekend in Minutes</h1>
-    <p class="lead mt-3">
-        Premium itineraries, stadium guides, booking links, and insider tips — all in one place.
+<div class="p-5 mb-5 rounded shadow" style="background: linear-gradient(135deg, #111827, #1f2937);">
+    <h1 class="fw-bold display-4 text-white">Your Football Weekend, Perfectly Planned</h1>
+    <p class="lead text-light mt-3">
+        Curated itineraries, stadium guides, booking links, and insider tips all in one place.
     </p>
 
     <a href="{% url 'pack_list' %}" class="btn btn-warning btn-lg mt-3">
-        Browse Packs →
+        Explore Packs →
     </a>
 </div>
+
 
 <!-- FEATURED PACKS -->
 <h2 class="fw-bold mb-4">Featured Packs</h2>
 
 <div class="row">
     {% for pack in featured %}
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
+<div class="card shadow-sm h-100">
 
-                {% if pack.image %}
-                    <img src="{{ pack.image.url }}" class="card-img-top" alt="{{ pack.title }}">
-                {% endif %}
+    {% if pack.image %}
+        <img src="{{ pack.image.url }}" class="card-img-top rounded-top" alt="{{ pack.title }}">
+    {% endif %}
 
-                <div class="card-body">
-                    <h5 class="card-title">{{ pack.title }}</h5>
-                    <p class="text-muted">{{ pack.club }} — {{ pack.league }}</p>
+    <div class="card-body">
 
-                    <p class="fw-bold text-primary">£{{ pack.price }}</p>
+        <h5 class="card-title">{{ pack.title }}</h5>
 
-                    <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100">
-                        View Pack →
-                    </a>
-                </div>
-            </div>
+        <!-- BADGES -->
+        <div class="mb-2">
+            {% if pack.is_premium %}
+                <span class="badge bg-warning text-dark me-1">Premium</span>
+            {% endif %}
+
+            {% if pack.is_new %}
+                <span class="badge bg-success">New</span>
+            {% endif %}
+        </div>
+
+        <p class="text-muted">{{ pack.club }} — {{ pack.league }}</p>
+
+        <p class="fw-bold text-primary">£{{ pack.price }}</p>
+
+        <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100">
+            View Pack →
+        </a>
+
+    </div>
+</div>
+
         </div>
     {% endfor %}
 </div>

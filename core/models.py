@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import timedelta
+from django.utils import timezone
 class Pack(models.Model):
     title = models.CharField(max_length=200)
     club = models.CharField(max_length=200)
@@ -26,7 +27,7 @@ class Pack(models.Model):
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
-
+       
     def __str__(self):
         return self.title
 
@@ -41,3 +42,7 @@ class UnlockedPack(models.Model):
 
     def __str__(self):
         return f"{self.user.username} unlocked {self.pack.title}"
+
+def is_new(self):
+    return self.created_at >= timezone.now() - timedelta(days=7)
+ 
