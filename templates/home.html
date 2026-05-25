@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="p-5 mb-5 bg-dark text-white rounded shadow">
+    <h1 class="fw-bold display-5">Plan Your Football Weekend in Minutes</h1>
+    <p class="lead mt-3">
+        Premium itineraries, stadium guides, booking links, and insider tips — all in one place.
+    </p>
+
+    <a href="{% url 'pack_list' %}" class="btn btn-warning btn-lg mt-3">
+        Browse Packs →
+    </a>
+</div>
+
+<!-- FEATURED PACKS -->
+<h2 class="fw-bold mb-4">Featured Packs</h2>
+
+<div class="row">
+    {% for pack in featured %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+
+                {% if pack.image %}
+                    <img src="{{ pack.image.url }}" class="card-img-top" alt="{{ pack.title }}">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ pack.title }}</h5>
+                    <p class="text-muted">{{ pack.club }} — {{ pack.league }}</p>
+
+                    <p class="fw-bold text-primary">£{{ pack.price }}</p>
+
+                    <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100">
+                        View Pack →
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- CTA -->
+<div class="text-center mt-5">
+    <a href="{% url 'pack_list' %}" class="btn btn-outline-dark btn-lg">
+        View All Packs →
+    </a>
+</div>
+
+{% endblock %}

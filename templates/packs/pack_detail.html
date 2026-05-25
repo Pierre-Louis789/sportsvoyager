@@ -37,10 +37,10 @@
     </ul>
 </div>
 
-<h2 class="mb-3">Booking and Recommendations</h2>
+<!-- BOOKING LINKS -->
+<h2 class="mb-3">Booking & Recommendations</h2>
 
 {% if unlocked or not pack.is_premium %}
-    <!-- BOOKING BUTTONS -->
     <div class="mt-4">
         {% if pack.flight_link %}
             <a href="{{ pack.flight_link }}" target="_blank" class="btn btn-primary mb-2 w-100">
@@ -66,14 +66,15 @@
             </a>
         {% endif %}
     </div>
-
 {% else %}
-    <!-- LOCKED VERSION -->
     <div class="bg-white p-4 rounded shadow-sm border position-relative overflow-hidden" style="min-height: 180px;">
         <div class="blur-overlay"></div>
         <p class="mb-0 text-muted" style="white-space: pre-line;">{{ pack.teaser }}</p>
     </div>
 
+    <a href="{% url 'unlock_pack' pack.pk %}" class="btn btn-warning btn-lg mt-4 w-100">
+        Unlock Full Pack 🔓
+    </a>
 {% endif %}
 
 <!-- ITINERARY -->

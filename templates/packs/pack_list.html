@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="fw-bold mb-4">Football Trip Packs</h1>
+
+<!-- SEARCH BAR -->
+<form method="GET" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search packs..." value="{{ query }}">
+        <button class="btn btn-dark" type="submit">Search</button>
+    </div>
+</form>
+
+<!-- PACK GRID -->
+<div class="row">
+    {% for pack in packs %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+
+                {% if pack.image %}
+                    <img src="{{ pack.image.url }}" class="card-img-top" alt="{{ pack.title }}">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ pack.title }}</h5>
+                    <p class="text-muted">{{ pack.club }} — {{ pack.league }}</p>
+
+                    <p class="fw-bold text-primary">£{{ pack.price }}</p>
+
+                    <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100">
+                        View Pack →
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No packs found.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
+                                   
