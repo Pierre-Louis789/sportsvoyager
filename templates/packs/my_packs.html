@@ -5,49 +5,51 @@
 <h1 class="fw-bold mb-4">My Packs</h1>
 
 {% if unlocked %}
-    <div class="row">
+    <div class="row g-4">
         {% for item in unlocked %}
             {% with pack=item.pack %}
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm h-100">
+                <div class="col-md-4">
+                    <div class="card shadow-soft h-100 border-0">
 
-    {% if pack.image %}
-        <img src="{{ pack.image.url }}" class="card-img-top rounded-top" alt="{{ pack.title }}">
-    {% endif %}
+                        {% if pack.image %}
+                            <img src="{{ pack.image.url }}" class="card-img-top rounded-top" alt="{{ pack.title }}">
+                        {% endif %}
 
-    <div class="card-body">
+                        <div class="card-body">
 
-        <h5 class="card-title">{{ pack.title }}</h5>
+                            <h5 class="card-title fw-bold">{{ pack.title }}</h5>
 
-        <!-- BADGES -->
-        <div class="mb-2">
-            {% if pack.is_premium %}
-                <span class="badge bg-warning text-dark me-1">Premium</span>
-            {% endif %}
+                            <!-- BADGES -->
+                            <div class="mb-2">
+                                {% if pack.is_premium %}
+                                    <span class="badge bg-warning text-dark me-1">Premium</span>
+                                {% endif %}
+                                {% if pack.is_new %}
+                                    <span class="badge bg-success">New</span>
+                                {% endif %}
+                            </div>
 
-            {% if pack.is_new %}
-                <span class="badge bg-success">New</span>
-            {% endif %}
-        </div>
+                            <p class="text-muted mb-1">{{ pack.club }} — {{ pack.league }}</p>
+                            <p class="fw-bold text-primary fs-5">£{{ pack.price }}</p>
 
-        <p class="text-muted">{{ pack.club }} — {{ pack.league }}</p>
+                            <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100 mt-2">
+                                View Pack →
+                            </a>
 
-        <p class="fw-bold text-primary">£{{ pack.price }}</p>
-
-        <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100">
-            View Pack →
-        </a>
-
+                        </div>
+                    </div>
+                </div>
+            {% endwith %}
+        {% endfor %}
     </div>
-</div>
-</div>
-{% endwith %}
-{% endfor %}
-</div>
 
 {% else %}
-    <p class="text-muted fs-5">You haven’t unlocked any packs yet.</p>
-    <a href="{% url 'pack_list' %}" class="btn btn-warning btn-lg mt-3">Browse Packs →</a>
+    <div class="text-center py-5">
+        <p class="text-muted fs-5 mb-3">You haven’t unlocked any packs yet.</p>
+        <a href="{% url 'pack_list' %}" class="btn btn-premium btn-lg px-4">
+            Browse Packs →
+        </a>
+    </div>
 {% endif %}
 
 {% endblock %}
