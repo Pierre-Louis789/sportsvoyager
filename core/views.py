@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db import models
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomRegisterForm
+from .models import UserProfile
 from django.contrib.auth.decorators import login_required
 from .models import Pack, UnlockedPack
 
@@ -42,14 +43,15 @@ def pack_detail(request, pk):
     })
 
 
+
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = CustomRegisterForm()
 
     return render(request, 'auth/register.html', {'form': form})
 
@@ -63,6 +65,49 @@ def unlock_pack(request, pk):
 
     return redirect('pack_detail', pk=pk)
 
+
 def my_packs(request):
     unlocked = UnlockedPack.objects.filter(user=request.user).select_related('pack')
     return render(request, 'packs/my_packs.html', {'unlocked': unlocked})
+
+
+@login_required
+def profile(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    return render(request, 'profile/profile.html', {'profile': profile})
+
+@login_required
+def profile_edit(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+
+    if request.method == 'POST':
+        profile.favourite_team = request.POST.get('favourite_team')
+        profile.country = request.POST.get('country')
+        profile.bio = request.POST.get('bio')
+        if 'avatar' in request.FILES:
+            profile.avatar = request.FILES['avatar']
+        profile.save()
+        return redirect('profile')
+
+    return render(request, 'profile/profile_edit.html', {'profile': profile})
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard/dashboard.html')
+
+
+@login_required
+def wishlist(request):
+    items = request.user.wishlistitem_set.all()
+    return render(request, 'wishlist/wishlist.html', {'items': items})
+
+@login_required
+def my_trips(request):
+    trips = Trip.objects.filter(user=request.user)
+    return render(request, 'trips/my_trips.html', {'trips': trips})
+
+@login_required
+def incoming_trips(request):
+    trips = Trip.objects.filter(user=request.user, date__gte=timezone.now())
+    return render(request, 'trips/incoming_trips.html', {'trips': trips})

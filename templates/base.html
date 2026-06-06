@@ -217,8 +217,12 @@ footer a:hover::after {
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == '/my-packs/' %}active{% endif %}" href="/my-packs/">My Packs</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link {% if request.path == '/profile/' %}active{% endif %}" href="/profile/">My Profile</a>
+                </li>
                 {% endif %}
             </ul>
+                
 
             <div class="d-flex">
                 {% if user.is_authenticated %}

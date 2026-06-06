@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="fw-bold mb-4">Edit Profile</h2>
+
+    <div class="card shadow-sm p-4">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Favourite Team</label>
+                <input type="text" name="favourite_team" class="form-control" value="{{ profile.favourite_team }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Country</label>
+                <input type="text" name="country" class="form-control" value="{{ profile.country }}">
+            </div>
+
+            <button class="btn btn-primary">Save Changes</button>
+            <a href="{% url 'profile' %}" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
