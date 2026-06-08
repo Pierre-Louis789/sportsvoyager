@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1 class="fw-bold mb-4">Football Trip Packs</h1>
+<h1 class="fw-bold mb-4 text-gold">Football Trip Packs</h1>
 
 <!-- SEARCH BAR -->
 <form method="GET" class="mb-4">
     <div class="input-group shadow-soft">
         <input type="text" name="q" class="form-control" placeholder="Search packs..." value="{{ query }}">
-        <button class="btn btn-dark px-4" type="submit">Search</button>
+        <button class="btn btn-hero-primary px-4" type="submit">Search</button>
     </div>
 </form>
 
@@ -16,15 +16,17 @@
 <div class="row g-4">
     {% for pack in packs %}
         <div class="col-md-4">
-            <div class="card shadow-soft h-100 border-0">
+            <div class="card-pack h-100">
 
                 {% if pack.image %}
-                    <img src="{{ pack.image.url }}" class="card-img-top rounded-top" alt="{{ pack.title }}">
+                    <img src="{{ pack.image.url }}" class="pack-img" alt="{{ pack.title }}">
+                {% else %}
+                    <div class="pack-img placeholder-img"></div>
                 {% endif %}
 
                 <div class="card-body">
 
-                    <h5 class="card-title fw-bold">{{ pack.title }}</h5>
+                    <h5 class="card-title fw-bold text-light">{{ pack.title }}</h5>
 
                     <!-- BADGES -->
                     <div class="mb-2">
@@ -37,9 +39,9 @@
                     </div>
 
                     <p class="text-muted mb-1">{{ pack.club }} — {{ pack.league }}</p>
-                    <p class="fw-bold text-primary fs-5">£{{ pack.price }}</p>
+                    <p class="fw-bold text-gold fs-5">£{{ pack.price }}</p>
 
-                    <a href="{% url 'pack_detail' pack.pk %}" class="btn btn-dark w-100 mt-2">
+                    <a href="{% url 'pack_detail' pack.pk %}" class="btn-hero-primary w-100 mt-2">
                         View Pack →
                     </a>
 

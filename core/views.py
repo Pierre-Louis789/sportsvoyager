@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db import models
-from .forms import CustomRegisterForm
-from .models import UserProfile
 from django.contrib.auth.decorators import login_required
-from .models import Pack, UnlockedPack
+
+from .forms import CustomRegisterForm, CommentForm
+from .models import UserProfile, Pack, UnlockedPack, Comment
 
 
 def home(request):
-    featured = Pack.objects.all().order_by('-created_at')[:3]  # latest 3 packs
+    featured = Pack.objects.all()[:3]
     return render(request, 'home.html', {'featured': featured})
 
 
@@ -32,16 +32,34 @@ def pack_list(request):
 
 def pack_detail(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
+    comments = pack.comments.all()
 
+    # Handle comment POST
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return redirect('login')
+
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.pack = pack
+            comment.user = request.user
+            comment.save()
+            return redirect('pack_detail', pk=pk)
+    else:
+        form = CommentForm()
+
+    # Check if pack is unlocked
     unlocked = False
     if request.user.is_authenticated:
         unlocked = UnlockedPack.objects.filter(user=request.user, pack=pack).exists()
 
     return render(request, 'packs/pack_detail.html', {
         'pack': pack,
-        'unlocked': unlocked
+        'comments': comments,
+        'form': form,
+        'unlocked': unlocked,
     })
-
 
 
 def register(request):
@@ -59,10 +77,7 @@ def register(request):
 @login_required
 def unlock_pack(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
-
-    # Create unlock record if not exists
     UnlockedPack.objects.get_or_create(user=request.user, pack=pack)
-
     return redirect('pack_detail', pk=pk)
 
 
@@ -76,38 +91,20 @@ def profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     return render(request, 'profile/profile.html', {'profile': profile})
 
+
 @login_required
 def profile_edit(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
-
 
     if request.method == 'POST':
         profile.favourite_team = request.POST.get('favourite_team')
         profile.country = request.POST.get('country')
         profile.bio = request.POST.get('bio')
+
         if 'avatar' in request.FILES:
             profile.avatar = request.FILES['avatar']
+
         profile.save()
         return redirect('profile')
 
     return render(request, 'profile/profile_edit.html', {'profile': profile})
-
-@login_required
-def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
-
-
-@login_required
-def wishlist(request):
-    items = request.user.wishlistitem_set.all()
-    return render(request, 'wishlist/wishlist.html', {'items': items})
-
-@login_required
-def my_trips(request):
-    trips = Trip.objects.filter(user=request.user)
-    return render(request, 'trips/my_trips.html', {'trips': trips})
-
-@login_required
-def incoming_trips(request):
-    trips = Trip.objects.filter(user=request.user, date__gte=timezone.now())
-    return render(request, 'trips/incoming_trips.html', {'trips': trips})

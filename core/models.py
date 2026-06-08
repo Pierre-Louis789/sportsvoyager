@@ -139,7 +139,17 @@ class UserProfile(models.Model):
         return self.user.username
     
 
-class WishlistItem(models.Model):
+from django.db import models
+from django.contrib.auth.models import User
+
+class Comment(models.Model):
+    pack = models.ForeignKey('Pack', on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
-    added_at = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']  # newest first
+
+    def __str__(self):
+        return f"{self.user.username} on {self.pack.title}"

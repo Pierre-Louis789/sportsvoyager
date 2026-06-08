@@ -2,112 +2,180 @@
 
 {% block content %}
 
+<!-- ========================= -->
 <!-- HERO SECTION -->
-<div class="hero-section d-flex align-items-center text-center text-white">
+<!-- ========================= -->
+<div class="hero-section">
+    <!-- Floating orbs -->
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+
     <div class="container">
-        <h1 class="display-4 fw-bold">Your Football Trip, Perfectly Planned</h1>
-        <p class="lead mt-3">
-            Discover curated travel packs with stadium guides, match‑day itineraries, 
-            local tips, and unforgettable experiences.
-        </p>
-        <a href="{% url 'pack_list' %}" class="btn btn-primary btn-lg mt-4">
-            Explore Packs
-        </a>
+        <div class="hero-glass text-center fade-up">
+            <h1>
+                Your <span class="hero-highlight">Football Trip</span>,<br>
+                Perfectly Planned.
+            </h1>
+            <p class="mt-3 fade-up delay-1">
+                Curated football travel packs with stadium guides, match‑day itineraries,
+                local tips, and unforgettable experiences in Europe’s greatest football cities.
+            </p>
+            <div class="mt-4 fade-up delay-2">
+                <a href="{% url 'pack_list' %}" class="btn-hero-primary">
+                    Explore Packs
+                </a>
+                <a href="{% url 'register' %}" class="btn-hero-ghost ms-2">
+                    Create an Account
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
+<!-- Soft wave transition -->
+<div class="hero-wave">
+    <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#020617" d="M0,96 C240,160 480,160 720,112 C960,64 1200,0 1440,32 L1440,180 L0,180 Z"></path>
+    </svg>
+</div>
+
+<!-- ========================= -->
 <!-- WHAT WE OFFER -->
+<!-- ========================= -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title fade-up">
+            What <span>We Offer</span>
+        </h2>
 
-<div class="container py-5">
-    <h2 class="text-center fw-bold mb-4">What We Offer</h2>
-
-    <div class="row text-center g-4">
-
-        <div class="col-md-4">
-            <div class="card shadow-sm p-4 h-100">
-                <h4 class="fw-bold">Curated Travel Packs</h4>
-                <p class="text-muted mt-2">
-                    Stadium guides, city tips, food spots, transport, safety, and more.
-                </p>
+        <div class="row g-4 mt-3">
+            <div class="col-md-4 fade-up delay-1">
+                <div class="card-premium">
+                    <h4>Curated Travel Packs</h4>
+                    <p>
+                        Hand‑picked football city guides with stadium tours, local food spots,
+                        neighborhoods, and must‑see landmarks — all in one place.
+                    </p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm p-4 h-100">
-                <h4 class="fw-bold">Premium Match‑Day Itineraries</h4>
-                <p class="text-muted mt-2">
-                    Unlock full itineraries with hidden gems and local experiences.
-                </p>
+            <div class="col-md-4 fade-up delay-2">
+                <div class="card-premium">
+                    <h4>Premium Match‑Day Itineraries</h4>
+                    <p>
+                        From breakfast to full‑time whistle: timings, routes, bars, fan zones,
+                        and hidden gems around the stadium so you never miss a moment.
+                    </p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm p-4 h-100">
-                <h4 class="fw-bold">Your Football Travel Hub</h4>
-                <p class="text-muted mt-2">
-                    Save your unlocked packs and build your personal travel collection.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="container py-5">
-    <h2 class="fw-bold mb-4 text-center">Featured Packs</h2>
-
-    <div class="row g-4">
-        {% for pack in featured %}
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <img src="{{ pack.image.url }}" class="card-img-top" alt="{{ pack.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pack.title }}</h5>
-                    <p class="text-muted">{{ pack.short_description }}</p>
-                    <a href="{% url 'pack_detail' pack.id %}" class="btn btn-primary">View Pack</a>
+            <div class="col-md-4 fade-up delay-3">
+                <div class="card-premium">
+                    <h4>Your Football Travel Hub</h4>
+                    <p>
+                        Unlock and save your favorite packs, compare trips, and build your own
+                        collection of football city experiences over time.
+                    </p>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
-</div>
+</section>
 
-<div class="container py-5">
-    <h2 class="fw-bold text-center mb-4">What Fans Say</h2>
+<!-- ========================= -->
+<!-- FEATURED PACKS -->
+<!-- ========================= -->
+<section class="section section-soft">
+    <div class="container">
+        <h2 class="section-title fade-up">
+            Featured <span>Packs</span>
+        </h2>
 
-    <div class="row g-4">
-
-        <div class="col-md-4">
-            <div class="card shadow-sm p-4 h-100">
-                <p class="text-muted">
-                    “Sports Voyager made my trip to Barcelona absolutely perfect. 
-                    The itinerary help me to naavigate the city with ease.”
-                </p>
-                <h6 class="fw-bold mt-3">— Alex M.</h6>
+        <div class="row g-4 mt-3">
+            {% for pack in featured %}
+            <div class="col-md-4 fade-up delay-1">
+                <div class="card-pack">
+                    <img src="{{ pack.image.url }}" alt="{{ pack.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ pack.title }}</h5>
+                        <p class="card-text">{{ pack.short_description }}</p>
+                        <a href="{% url 'pack_detail' pack.id %}" class="btn-pack">
+                            View Pack
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm p-4 h-100">
-                <p class="text-muted">
-                    “The game by himself was great, added with all food and visit recommendations make the experience amazing.”
-                </p>
-                <h6 class="fw-bold mt-3">— Sarah L.</h6>
+            {% empty %}
+            <div class="col-12 text-center text-muted">
+                <p class="fade-up delay-1">No featured packs yet — check back soon.</p>
             </div>
+            {% endfor %}
         </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm p-4 h-100">
-                <p class="text-muted">
-                    “Unlocked the Milan pack, it was worth every penny to navigate the city over 2 days and so easy to book flights, hotels and tickets.
-                    Best football trip I’ve done.”
-                
-                </p>
-                <h6 class="fw-bold mt-3">— Marco R.</h6>
-            </div>
-        </div>
-
     </div>
-</div>
+</section>
 
+<!-- ========================= -->
+<!-- TESTIMONIALS -->
+<!-- ========================= -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title fade-up">
+            What <span>Fans Say</span>
+        </h2>
 
+        <div class="row g-4 mt-3">
+            <div class="col-md-4 fade-up delay-1">
+                <div class="testimonial-card">
+                    <p>
+                        “Sports Voyager made my trip to Barcelona absolutely perfect.
+                        The itinerary made it effortless to explore the city and enjoy the match.”
+                    </p>
+                    <h6>— Alex M.</h6>
+                </div>
+            </div>
+
+            <div class="col-md-4 fade-up delay-2">
+                <div class="testimonial-card">
+                    <p>
+                        “The match was incredible, but the food spots and local tips turned it
+                        into a full football city experience. I’d use it again in a second.”
+                    </p>
+                    <h6>— Sarah L.</h6>
+                </div>
+            </div>
+
+            <div class="col-md-4 fade-up delay-3">
+                <div class="testimonial-card">
+                    <p>
+                        “Unlocked the Milan pack — worth every penny. It made planning flights,
+                        hotels, and stadium visits so easy. Best football trip I’ve done.”
+                    </p>
+                    <h6>— Marco R.</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- CTA -->
+<!-- ========================= -->
+<section class="cta-section fade-up delay-1">
+    <div class="container">
+        <h3 class="mb-3" style="font-weight: 800; letter-spacing: -0.04em;">
+            Ready to plan your next football city break?
+        </h3>
+        <p class="text-muted mb-4" style="color:#9ca3af !important;">
+            Create an account to save your favorite packs, or jump straight in and browse all destinations.
+        </p>
+        <a href="{% url 'register' %}" class="btn-cta-outline">
+            Create an Account
+        </a>
+        <a href="{% url 'pack_list' %}" class="btn-cta-primary">
+            Browse Packs
+        </a>
+    </div>
+</section>
+
+{% endblock %}
