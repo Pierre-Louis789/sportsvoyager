@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card-premium p-5 mx-auto text-center" style="max-width: 600px;">
+    <h2 class="fw-bold text-gold mb-3">Payment Successful 🎉</h2>
+
+    <p class="fs-5 mb-4">
+        You have unlocked <strong>{{ pack.title }}</strong>!
+    </p>
+
+    <a href="{% url 'pack_detail' pack.pk %}" class="btn-hero-primary w-100">
+        Go to Pack →
+    </a>
+</div>
+{% endblock %}

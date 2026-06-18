@@ -30,6 +30,8 @@ urlpatterns = [
     ),
     path('register/', views.register, name='register'),
 
+    path('checkout/<int:pk>/', views.checkout, name='checkout'),
+    path('payment-success/<int:pk>/', views.payment_success, name='payment_success'),
 
     # ============================
     # AUTH: CHANGE PASSWORD (LOGGED-IN USERS)

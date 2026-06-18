@@ -108,3 +108,30 @@ def profile_edit(request):
         return redirect('profile')
 
     return render(request, 'profile/profile_edit.html', {'profile': profile})
+
+
+@login_required
+def checkout(request, pk):
+    pack = get_object_or_404(Pack, pk=pk)
+
+    # If already unlocked, skip payment
+    if UnlockedPack.objects.filter(user=request.user, pack=pack).exists():
+        return redirect('pack_detail', pk=pk)
+
+    return render(request, 'payment/checkout.html', {'pack': pack})
+
+
+@login_required
+def payment_success(request, pk):
+    pack = get_object_or_404(Pack, pk=pk)
+
+    # Unlock the pack
+    UnlockedPack.objects.get_or_create(user=request.user, pack=pack)
+
+    # Send confirmation email
+    request.user.email_user(
+        subject=f"Your purchase: {pack.title}",
+        message=f"Hi {request.user.username},\n\nYou have successfully unlocked the pack: {pack.title}.\nEnjoy your trip planning!\n\nSports Voyager"
+    )
+
+    return render(request, 'payment/success.html', {'pack': pack})
