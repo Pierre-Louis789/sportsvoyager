@@ -8,6 +8,12 @@ from packs.forms import PackForm
 from core.forms import CommentForm
 
 
+import stripe
+from django.conf import settings
+from django.http import JsonResponse
+from django.urls import reverse
+
+
 def pack_list(request):
     query = request.GET.get('q', '')
 
@@ -121,7 +127,10 @@ def checkout(request, pk):
     if UnlockedPack.objects.filter(user=request.user, pack=pack).exists():
         return redirect('pack_detail', pk=pk)
 
-    return render(request, 'payment/checkout.html', {'pack': pack})
+    return render(request, 'payment/checkout.html', {
+        'pack': pack,
+        'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
+    })
 
 @login_required
 def payment_success(request, pk):
@@ -162,6 +171,7 @@ def pack_edit(request, pk):
 
     return render(request, 'packs/pack_forms.html', {'form': form, 'mode': 'Edit'})
 
+
 @staff_member_required
 def pack_delete(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
@@ -171,3 +181,33 @@ def pack_delete(request, pk):
         return redirect('pack_list')
 
     return render(request, 'packs/pack_delete.html', {'pack': pack})
+
+
+@login_required
+def create_checkout_session(request, pk):
+    pack = get_object_or_404(Pack, pk=pk)
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        mode='payment',
+        line_items=[{
+            'price_data': {
+                'currency': 'gbp',
+                'product_data': {
+                    'name': pack.title,
+                },
+                'unit_amount': int(pack.price * 100),
+            },
+            'quantity': 1,
+        }],
+        success_url=request.build_absolute_uri(
+            reverse('payment_success', args=[pack.pk])
+        ),
+        cancel_url=request.build_absolute_uri(
+            reverse('pack_detail', args=[pack.pk])
+        ),
+    )
+
+    return JsonResponse({'id': session.id})

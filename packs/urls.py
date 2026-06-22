@@ -9,6 +9,7 @@ urlpatterns = [
     path('pack/<int:pk>/unlock/', views.unlock_pack, name='unlock_pack'),
     path('pack/<int:pk>/checkout/', views.checkout, name='checkout'),
     path('pack/<int:pk>/payment-success/', views.payment_success, name='payment_success'),
+    path('pack/<int:pk>/create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
 
     # Admin
     path('add/', views.pack_create, name='pack_create'),
