@@ -12,6 +12,11 @@
     </div>
 </form>
 
+{% if user.is_staff %}
+    <a href="{% url 'pack_create' %}" class="btn-hero-primary mb-4">Add New Pack</a>
+{% endif %}
+
+
 <!-- PACK GRID -->
 <div class="row g-4">
     {% for pack in packs %}

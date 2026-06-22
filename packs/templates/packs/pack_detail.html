@@ -37,6 +37,14 @@
     </div>
 </div>
 
+{% if user.is_staff %}
+<div class="d-flex gap-2 mt-3">
+    <a href="{% url 'pack_edit' pack.pk %}" class="btn-nav-outline">Edit Pack</a>
+    <a href="{% url 'pack_delete' pack.pk %}" class="btn-nav-outline">Delete Pack</a>
+</div>
+{% endif %}
+
+
 <!-- Soft wave transition -->
 <div class="hero-wave">
     <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg">

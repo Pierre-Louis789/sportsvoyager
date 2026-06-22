@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Create Pack</h1>
+<div class="card-premium p-4 mx-auto" style="max-width: 700px;">
+    <h2 class="fw-bold text-gold mb-3">{{ mode }} Pack</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button class="btn-hero-primary w-100 mt-3">{{ mode }} Pack</button>
+    </form>
+</div>
+{% endblock %}
