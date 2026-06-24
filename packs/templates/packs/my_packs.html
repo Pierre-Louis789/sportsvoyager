@@ -14,7 +14,7 @@
                         {% if pack.image %}
                             <img src="{{ pack.image.url }}" class="pack-img" alt="{{ pack.title }}">
                         {% else %}
-                            <div class="pack-img placeholder-img"></div>
+                            <img src="{% static 'packs/manchester-city.webp' %}" class="pack-img" alt="{{ pack.title }}">
                         {% endif %}
 
                         <div class="card-body">

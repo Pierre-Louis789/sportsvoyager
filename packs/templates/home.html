@@ -96,7 +96,12 @@
             {% for pack in featured %}
             <div class="col-md-4 fade-up delay-1">
                 <div class="card-pack">
-                    <img src="{{ pack.image.url }}" alt="{{ pack.title }}">
+                    {% if pack.image %}
+                        <img src="{{ pack.image.url }}" alt="{{ pack.title }}">
+                    {% else %}
+                        <img src="{% static 'packs/manchester-city.webp' %}" alt="{{ pack.title }}">
+                    {% endif %}
+
                     <div class="card-body">
                         <h5 class="card-title">{{ pack.title }}</h5>
                         <p class="card-text">{{ pack.short_description }}</p>
