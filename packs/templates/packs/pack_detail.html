@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- ========================= -->
 <!-- HERO HEADER -->
 <!-- ========================= -->
 <div class="hero-section"
-     style="background-image: url('{% if pack.image %}{{ pack.image.url }}{% else %}/static/images/default.jpg{% endif %}');">
+     style="background-image: url('{% if pack.image %}{{ pack.image.url }}{% else %}{% static "images/barcelona-1.jpg" %}{% endif %}');">
 
 
-    <!-- Floating orbs -->
+
+
+
     <div class="hero-orb orb-1"></div>
     <div class="hero-orb orb-2"></div>
     <div class="hero-orb orb-3"></div>
