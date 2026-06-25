@@ -14,7 +14,6 @@ class PackForm(forms.ModelForm):
             'price',
             'description',
             'is_premium',
-            'is_new',
             'image_name',
         ]
 
