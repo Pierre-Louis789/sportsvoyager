@@ -12,10 +12,10 @@
                 <div class="col-md-4">
                     <div class="card-pack h-100">
 
-                        {% if pack.image %}
-                            <img src="{{ pack.image.url }}" class="pack-img" alt="{{ pack.title }}">
+                        {% if pack.image_name %}
+                            <img src="{% static 'packs/' %}{{ pack.image_name }}" class="pack-img" alt="{{ pack.title }}">
                         {% else %}
-                            <img src="{% static 'packs/manchester-city.webp' %}" class="pack-img" alt="{{ pack.title }}">
+                            <img src="{% static 'packs/pack-default.jpg' %}" class="pack-img" alt="{{ pack.title }}">
                         {% endif %}
 
                         <div class="card-body">

@@ -8,8 +8,7 @@
 <!-- HERO HEADER -->
 <!-- ========================= -->
 <div class="hero-section"
-        style="background-image: url('{% if pack.image %}{{ pack.image.url }}{% else %}{% static 'images/barcelona-1.jpg' %}{% endif %}');">
-
+     style="background-image: url('{% if pack.image_name %}{% static 'packs/' %}{{ pack.image_name }}{% else %}{% static 'packs/pack-default.jpg' %}{% endif %}');">
 
 
 

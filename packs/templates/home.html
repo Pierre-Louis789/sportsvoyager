@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<!-- Soft wave transition -->
+<!-- Transition -->
 <div class="hero-wave">
     <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg">
         <path fill="#020617" d="M0,96 C240,160 480,160 720,112 C960,64 1200,0 1440,32 L1440,180 L0,180 Z"></path>
@@ -96,11 +96,12 @@
             {% for pack in featured %}
             <div class="col-md-4 fade-up delay-1">
                 <div class="card-pack">
-                    {% if pack.image %}
-                        <img src="{{ pack.image.url }}" alt="{{ pack.title }}">
+                    {% if pack.image_name %}
+                        <img src="{% static 'packs/' %}{{ pack.image_name }}" class="pack-img" alt="{{ pack.title }}">
                     {% else %}
-                        <img src="{% static 'packs/manchester-city.webp' %}" alt="{{ pack.title }}">
+                        <img src="{% static 'packs/pack-default.jpg' %}" class="pack-img" alt="{{ pack.title }}">
                     {% endif %}
+
 
                     <div class="card-body">
                         <h5 class="card-title">{{ pack.title }}</h5>
