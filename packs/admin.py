@@ -149,12 +149,14 @@ class PackAdmin(admin.ModelAdmin):
         }),
     )
 
-    def preview_image(self, obj):
-        if obj.image_name:
-            return f'<img src="{obj.image.url}" style="max-height:150px;border-radius:6px;" />'
-        return "No image uploaded"
-    preview_image.allow_tags = True
-    preview_image.short_description = "Image Preview"
+   def preview_image(self, obj):
+    if obj.image_name:
+        return f'<img src="/static/packs/{obj.image_name}" style="max-height:150px;border-radius:6px;" />'
+    return "No image uploaded"
+
+preview_image.allow_tags = True
+preview_image.short_description = "Image Preview"
+
 
 
 @admin.register(UnlockedPack)
