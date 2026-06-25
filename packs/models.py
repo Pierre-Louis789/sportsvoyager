@@ -14,7 +14,8 @@ class Pack(models.Model):
     teaser = models.TextField(help_text="Short preview shown when locked", blank=True)
 
     # Media
-    image = models.ImageField(upload_to='packs/', blank=True, null=True)
+    image_name = models.CharField(max_length=255, blank=True, null=True)
+
 
     # Pricing & Premium
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)

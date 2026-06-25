@@ -8,7 +8,7 @@
 <!-- HERO HEADER -->
 <!-- ========================= -->
 <div class="hero-section"
-     style="background-image: url('{% if pack.image %}{{ pack.image.url }}{% else %}{% static "images/barcelona-1.jpg" %}{% endif %}');">
+        style="background-image: url('{% if pack.image %}{{ pack.image.url }}{% else %}{% static 'images/barcelona-1.jpg' %}{% endif %}');">
 
 
 
@@ -25,7 +25,7 @@
                 {{ pack.title }}
             </h1>
 
-            <p class=" mb-1" style="font-size: 1.1rem;">
+            <p class="fw-bold text-gold fs-5 mb-1">
                 {{ pack.club }} — {{ pack.league }}
             </p>
 
@@ -63,7 +63,7 @@
     <!-- SIDEBAR (only visible if unlocked) -->
     {% if unlocked or not pack.is_premium %}
     <div class="col-md-3 d-none d-md-block fade-up delay-1">
-        <div class="position-sticky" style="top: 120px;">
+        <div class="position-sticky" style="top: 100px;">
             <div class="card-premium p-3 quick-nav">
 
                 <h5 class="fw-bold mb-3 text-gold">Quick Navigation</h5>
