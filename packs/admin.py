@@ -10,7 +10,7 @@ class TimelineEntryInline(admin.TabularInline):
 
 @admin.register(Pack)
 class PackAdmin(admin.ModelAdmin):
-    list_display = ("title", "club", "league", "price", "is_premium", "created_at")
+    list_display = ("title", "club", "league", "price", "is_premium", "created_at", "preview_image")
     list_filter = ("league", "is_premium")
     search_fields = ("title", "club", "league")
     fields = ("title", "club", "league", "price", "is_premium", "image_name")
@@ -149,14 +149,13 @@ class PackAdmin(admin.ModelAdmin):
         }),
     )
 
-   def preview_image(self, obj):
-    if obj.image_name:
-        return f'<img src="/static/packs/{obj.image_name}" style="max-height:150px;border-radius:6px;" />'
-    return "No image uploaded"
+    def preview_image(self, obj):
+        if obj.image_name:
+            return f'<img src="/static/packs/{obj.image_name}" style="max-height:150px;border-radius:6px;" />'
+        return "No image uploaded"
 
-preview_image.allow_tags = True
-preview_image.short_description = "Image Preview"
-
+    preview_image.allow_tags = True
+    preview_image.short_description = "Image Preview"
 
 
 @admin.register(UnlockedPack)
