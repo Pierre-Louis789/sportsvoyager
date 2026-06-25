@@ -13,7 +13,8 @@ class PackForm(forms.ModelForm):
             'league',
             'price',
             'description',
-            'image',
             'is_premium',
+            'is_new',
+            'image_name',
         ]
 
