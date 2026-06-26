@@ -13,7 +13,6 @@ class PackAdmin(admin.ModelAdmin):
     list_display = ("title", "club", "league", "price", "is_premium", "created_at", "preview_image")
     list_filter = ("league", "is_premium")
     search_fields = ("title", "club", "league")
-    fields = ("title", "club", "league", "price", "is_premium", "image_name")
     ordering = ("-created_at",)
     inlines = [TimelineEntryInline]
 
