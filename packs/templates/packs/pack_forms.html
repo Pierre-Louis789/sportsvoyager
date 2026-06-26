@@ -1,15 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> Create Pack</h1>
-<div class="card-premium p-4 mx-auto" style="max-width: 700px;">
-    <h2 class="fw-bold text-gold mb-3">{{ mode }} Pack</h2>
 
-    <form method="POST" enctype="multipart/form-data">
+<h1 class="text-center fw-bold text-gold mb-4">{{ mode }} Pack</h1>
+
+<div class="card-premium p-4 mx-auto" style="max-width: 820px;">
+
+    <h2 class="fw-bold text-gold mb-4">{{ mode }} Pack</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="form-premium">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <div class="form-section">
+            <h4 class="form-section-title">Basic Information</h4>
+
+            <label>Title</label>
+            {{ form.title }}
+
+            <label>Club</label>
+            {{ form.club }}
+
+            <label>League</label>
+            {{ form.league }}
+
+            <label>Price (£)</label>
+            {{ form.price }}
+        </div>
+
+        <div class="form-section">
+            <h4 class="form-section-title">Description</h4>
+
+            <label>Description</label>
+            {{ form.description }}
+        </div>
+
+        <div class="form-section">
+            <h4 class="form-section-title">Pack Settings</h4>
+
+            <label>Premium Pack?</label>
+            {{ form.is_premium }}
+
+            <label>Image Name</label>
+            {{ form.image_name }}
+        </div>
 
         <button class="btn-hero-primary w-100 mt-3">{{ mode }} Pack</button>
     </form>
+
 </div>
+
 {% endblock %}
