@@ -623,7 +623,7 @@ a.btn, .btn, button.btn {
 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link nav-link-premium {% if request.path == '/packs/my-packs/' %}active{% endif %}" 
+                    <a class="nav-link nav-link-premium {% if request.path == '/packs/' %}active{% endif %}" 
                     href="{% url 'my_packs' %}">
                     Unlocked Packs    
                     </a>
