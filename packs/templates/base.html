@@ -10,6 +10,9 @@
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
+
 <style>
 
 /* =========================================
@@ -643,6 +646,76 @@ body {
     width: auto;
     margin-right: 8px;
 }
+
+
+/*============================
+    Authentication Forms
+==============================*/
+
+/* AUTH PAGES */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.auth-card {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.auth-title {
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+.auth-form label {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+}
+
+/* PROFILE */
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.profile-card {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+}
+
 
 
 

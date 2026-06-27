@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
 
 ALLOWED_HOSTS = ['*']  # Change this in production
@@ -115,7 +115,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'home'
 
-# Email backend for development (prints emails to console)
+# Email backend  (prints emails to console)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 

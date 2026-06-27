@@ -1,25 +1,26 @@
 {% extends "base.html" %}
-{% block content %}
-<div class="container py-5">
-    <h2 class="fw-bold mb-4">Your Profile</h2>
 
-    <div class="card shadow-sm p-4">
-        <div class="text-center">
+{% block content %}
+<div class="profile-wrapper fade-up">
+    <div class="profile-card">
+
+        <div class="text-center mb-4">
             {% if user.userprofile.avatar %}
-                <img src="{{ user.userprofile.avatar.url }}" class="rounded-circle mb-3" width="120">
+                <img src="{{ user.userprofile.avatar.url }}" class="profile-avatar">
             {% endif %}
-            <h4>{{ user.username }}</h4>
+            <h3 class="text-gold">{{ user.username }}</h3>
             <p class="text-muted">{{ user.email }}</p>
         </div>
 
-        <hr>
+        <div class="profile-info">
+            <p><strong>Favourite Team:</strong> {{ profile.favourite_team }}</p>
+            <p><strong>Country:</strong> {{ profile.country }}</p>
+        </div>
 
-        <p><strong>Favourite Team:</strong> {{ profile.favourite_team }}</p>
-        <p><strong>Country:</strong> {{ profile.country }}</p>
-
-        <a href="{% url 'profile_edit' %}" class="btn btn-primary mt-3">Edit Profile</a>
-        <a href="{% url 'password_change' %}" class="btn btn-warning mt-3">Change Password</a>
-        
+        <div class="mt-4">
+            <a href="{% url 'profile_edit' %}" class="btn-hero-primary w-100 mb-2">Edit Profile</a>
+            <a href="{% url 'password_change' %}" class="btn-hero-secondary w-100">Change Password</a>
+        </div>
 
     </div>
 </div>
