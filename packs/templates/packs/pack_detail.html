@@ -55,7 +55,6 @@
             <div class="sidebar-section">Trip Essentials</div>
             <a href="#stadium">🏟 Stadium</a>
             <a href="#city">🌆 City Tips</a>
-            <a href="#timeline">⏱ Timeline</a>
 
             <div class="sidebar-section">Where to Stay & Go</div>
             <a href="#hotel">🏨 Hotels</a>
@@ -153,19 +152,6 @@
                     <p class="fs-5"><strong>Local Food to Try:</strong> {{ pack.city_food }}</p>
                     <p class="fs-5"><strong>Nightlife & Bars:</strong> {{ pack.city_nightlife }}</p>
                     <p class="fs-5">{{ pack.city_tips }}</p>
-                </div>
-            </div>
-
-            <!-- TIMELINE -->
-            <div id="timeline" class="card-premium mb-5">
-                <div class="card-body p-4">
-                    <h3 class="fw-bold mb-3 text-gold"><i class="bi bi-clock-history"></i> Match‑Day Timeline</h3>
-                    {% for entry in pack.timeline_entries.all %}
-                        <div class="mb-4">
-                            <div class="fw-bold text-gold fs-5">{{ entry.time }}</div>
-                            <div class="fs-5">{{ entry.description }}</div>
-                        </div>
-                    {% endfor %}
                 </div>
             </div>
 
