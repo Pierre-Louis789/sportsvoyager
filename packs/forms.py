@@ -16,4 +16,3 @@ class PackForm(forms.ModelForm):
             'is_premium',
             'image_name',
         ]
-

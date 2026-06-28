@@ -16,7 +16,6 @@ class Pack(models.Model):
     # Media
     image_name = models.CharField(max_length=255, blank=True, null=True)
 
-
     # Pricing & Premium
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     is_premium = models.BooleanField(default=True)

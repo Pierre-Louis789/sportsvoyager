@@ -37,6 +37,19 @@ body {
     line-height: 1.7;
     background: #050816;
     color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    flex: 1;
 }
 
 
@@ -387,7 +400,9 @@ body {
     color: #d1d5db !important;
 }
 
-/* Sidebar */
+/* ==========================
+          Sidebar
+ ============================ */
 
 .premium-sidebar {
     background: rgba(15, 23, 42, 0.55);
@@ -693,7 +708,9 @@ body {
     color: #fff;
 }
 
-/* PROFILE */
+/* ===========================
+        PROFILE 
+=============================== */
 .profile-wrapper {
     display: flex;
     justify-content: center;
@@ -731,6 +748,7 @@ body {
     padding-top: 60px;
     padding-bottom: 60px;
     backdrop-filter: blur(12px);
+    margin-top: auto;
 }
 
 .footer-tagline {
@@ -803,163 +821,210 @@ body {
    RESPONSIVE — PHONES, SMALL PHONES, TABLETS
 ========================================= */
 
-/* ---------- Phones & small tablets (≤ 768px) ---------- */
-@media (max-width: 768px) {
+/* =========================================
+   GLOBAL MOBILE-FIRST BASE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.section {
+    padding: 60px 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* =========================================
+   SMALL PHONES (≤ 480px)
+========================================= */
+@media (max-width: 480px) {
 
     /* HERO */
     .hero-section {
-        background-attachment: scroll;
-        min-height: 50vh;
+        min-height: 40vh;
         padding: 0 1rem;
+        background-size: cover;
+        background-position: center;
     }
 
     .hero-glass {
-        padding: 20px 18px 24px;
-        margin: 0 0.5rem;
-        border-radius: 18px;
+        padding: 16px 14px 20px;
+        margin: 0 0.4rem;
+        border-radius: 14px;
     }
 
     .hero-section h1 {
-        font-size: 1.9rem;
-        line-height: 1.2;
-        margin-bottom: 0.6rem;
+        font-size: 1.45rem;
+        line-height: 1.15;
     }
 
     .hero-section p {
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .hero-orb {
-        opacity: 0.35;
-        filter: blur(2px);
+        font-size: 0.9rem;
+        line-height: 1.35;
     }
 
     /* BUTTONS */
+    .btn,
     .btn-hero-primary,
     .btn-hero-ghost {
-        padding: 0.75rem 1.4rem;
-        font-size: 0.9rem;
-    }
-
-    /* CTA BUTTONS */
-    .btn-cta-primary {
-        display: block;
-        margin: 1rem auto 0;
-    }
-
-    /* SECTIONS */
-    .section {
-        padding: 50px 0;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.85rem;
+        width: 100%;
+        text-align: center;
     }
 
     /* PACK CARDS */
     .card-pack img {
-        height: 170px;
+        height: 140px;
+        object-fit: cover;
     }
 
-    .card-pack .card-body {
-        padding: 16px 16px 18px;
-    }
-
-    /* SIDEBAR — MOBILE VERSION */
-    
+    /* SIDEBAR */
     .premium-sidebar {
-        position: static;
-        width: 100%;                 
-        padding: 26px 22px;          
-        margin-bottom: 2.5rem;
-        border-radius: 18px;
-        background: rgba(255,255,255,0.05);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-
-    .sidebar-title {
-        font-size: 1.15rem;
-        margin-bottom: 1.4rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-
-    .premium-sidebar a {
-        display: block;
-        padding: 0.75rem 1.2rem;
-        font-size: 1rem;
-        border-radius: 12px;
-        margin-bottom: 0.65rem;
-        background: rgba(255,255,255,0.03);
-    }
-
-    .sidebar-section {
-        margin-top: 1.6rem;
-        margin-bottom: 0.8rem;
-        font-size: 1rem;
-        font-weight: 700;
-    }
-
-
-
-    /* SOCIAL ICONS */
-    .social-links {
-        gap: 14px;
-    }
-}
-
-/* ---------- Small phones (≤ 480px) ---------- */
-@media (max-width: 480px) {
-
-    .hero-section {
-        min-height: 48vh;
-    }
-
-    .hero-section h1 {
-        font-size: 1.7rem;
-    }
-
-    .hero-glass {
-        padding: 18px 16px 22px;
-    }
-
-    .card-pack img {
-        height: 150px;
-    }
-
-    .premium-sidebar {
+        width: 100%;
         padding: 20px 16px;
+        margin-bottom: 2rem;
+        border-radius: 14px;
+    }
+
+    /* FORMS */
+    form input,
+    form select,
+    form textarea {
+        font-size: 0.95rem;
+        padding: 0.75rem;
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 1.5rem 0;
+        text-align: center;
+    }
+
+    footer .footer-links {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 
 /* =========================================
-   TABLETS — MEDIUM SCREENS (769px–1024px)
+   PHONES & SMALL TABLETS (≤ 768px)
 ========================================= */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 768px) {
 
+    /* HERO */
     .hero-section {
-        min-height: 50vh;
-        padding: 0 1.5rem;
+        min-height: 45vh;
+        padding: 0 1.2rem;
+    }
+
+    .hero-glass {
+        padding: 20px 18px 24px;
+        margin: 0 0.6rem;
+        border-radius: 18px;
     }
 
     .hero-section h1 {
-        font-size: 2.4rem;
+        font-size: 1.85rem;
+        line-height: 1.2;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    /* PACK CARDS */
+    .card-pack img {
+        height: 160px;
+    }
+
+    /* SIDEBAR */
+    .premium-sidebar {
+        width: 100%;
+        padding: 24px 20px;
+        margin-bottom: 2rem;
+        border-radius: 16px;
+    }
+
+    .premium-sidebar a {
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.6rem;
+    }
+
+    /* PROFILE PAGE */
+    .profile-wrapper {
+        padding: 1.5rem;
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 2rem 0;
+    }
+}
+
+/* =========================================
+   TABLETS (769px–1024px)
+========================================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /* HERO */
+    .hero-section {
+        min-height: 45vh;
+        padding: 0 2rem;
+        background-position: center;
+    }
+
+    .hero-section h1 {
+        font-size: 2.2rem;
     }
 
     .hero-glass {
         padding: 26px 22px 30px;
     }
 
+    /* PACK CARDS */
     .card-pack img {
-        height: 200px;
+        height: 190px;
     }
 
-    
+    /* SIDEBAR */
     .premium-sidebar {
         position: sticky;
         top: 20px;
+        padding: 22px 20px;
         max-height: calc(100vh - 40px);
         overflow-y: auto;
-        padding: 22px 20px;
+    }
+
+    /* PROFILE PAGE */
+    .profile-wrapper {
+        max-width: 80%;
+        padding: 2rem;
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 2.5rem 0;
     }
 }
+
+
+
+
+
 
 </style>
 
@@ -1030,19 +1095,21 @@ body {
 
 
 <!-- MAIN CONTENT -->
-<div class="container mt-4">
-    {% block content %}
-    {% endblock %}
+ <div class="main-content">
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
 </div>
 
 <!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- FOOTER -->
-<footer class="footer-premium mt-5 py-5">
+<footer class="footer-premium py-5">
     <div class="container text-center">
 
-        <h4 class="fw-bold mb-3 text-gold">Sports Voyager</h4>
+        <h2 class="fw-bold mb-3 text-gold">Sports Voyager</h2>
 
         <p class="footer-tagline mb-4">
             Your football weekend, perfectly planned — itineraries, stadium guides, booking links and insider tips.
@@ -1067,7 +1134,5 @@ body {
 
     </div>
 </footer>
-
-
 </body>
 </html>

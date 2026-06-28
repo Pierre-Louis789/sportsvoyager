@@ -62,16 +62,19 @@ def pack_detail(request, pk):
         'unlocked': unlocked,
     })
 
+
 @login_required
 def unlock_pack(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
     UnlockedPack.objects.get_or_create(user=request.user, pack=pack)
     return redirect('pack_detail', pk=pk)
 
+
 @login_required
 def my_packs(request):
     unlocked = UnlockedPack.objects.filter(user=request.user).select_related('pack')
     return render(request, 'packs/my_packs.html', {'unlocked': unlocked})
+
 
 @login_required
 def comment(request, pk):
@@ -90,6 +93,7 @@ def comment(request, pk):
 
     return render(request, 'packs/comment_form.html', {'form': form, 'pack': pack})
 
+
 @login_required
 def comment_edit(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -107,6 +111,7 @@ def comment_edit(request, pk):
 
     return render(request, 'packs/comment_edit.html', {'form': form, 'comment': comment})
 
+
 @login_required
 def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -120,6 +125,7 @@ def comment_delete(request, pk):
 
     return render(request, 'packs/comment_delete.html', {'comment': comment})
 
+
 @login_required
 def checkout(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
@@ -132,6 +138,7 @@ def checkout(request, pk):
         'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
     })
 
+
 @login_required
 def payment_success(request, pk):
     pack = get_object_or_404(Pack, pk=pk)
@@ -140,10 +147,16 @@ def payment_success(request, pk):
 
     request.user.email_user(
         subject=f"Your purchase: {pack.title}",
-        message=f"Hi {request.user.username},\n\nYou have successfully unlocked the pack: {pack.title}.\nEnjoy your trip planning!\n\nSports Voyager"
+        message=(
+            f"Hi {request.user.username},\n\n"
+            f"You have successfully unlocked the pack: {pack.title}.\n"
+            "Enjoy your trip planning!\n\n"
+            "Sports Voyager"
+        )
     )
 
     return render(request, 'payment/success.html', {'pack': pack})
+
 
 @staff_member_required
 def pack_create(request):
@@ -156,6 +169,7 @@ def pack_create(request):
         form = PackForm()
 
     return render(request, 'packs/pack_forms.html', {'form': form, 'mode': 'Create'})
+
 
 @staff_member_required
 def pack_edit(request, pk):

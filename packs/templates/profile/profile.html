@@ -8,7 +8,7 @@
             {% if user.userprofile.avatar %}
                 <img src="{{ user.userprofile.avatar.url }}" class="profile-avatar">
             {% endif %}
-            <h3 class="text-gold">{{ user.username }}</h3>
+            <h1 class="text-gold">{{ user.username }}</h1>
             <p class="text-muted">{{ user.email }}</p>
         </div>
 
@@ -19,7 +19,7 @@
 
         <div class="mt-4">
             <a href="{% url 'profile_edit' %}" class="btn-hero-primary w-100 mb-2">Edit Profile</a>
-            <a href="{% url 'password_change' %}" class="btn-hero-secondary w-100">Change Password</a>
+            <a href="{% url 'password_change' %}" class="btn-hero-ghost w-100">Change Password</a>
         </div>
 
     </div>
