@@ -515,6 +515,22 @@ Sports Voyager includes a full set of admin‑facing tools that allow staff user
 - Search and filter tools for packs, users, and unlocks.
 - Consistent colour scheme matching Sports Voyager branding.
 
+### 🖼️ Admin Interface Screenshots
+
+Below are screenshots demonstrating the Django Admin panel used to manage packs, premium content, comments, and user unlocks.
+
+![Admin Packs](static/screenshots/admin-backend.png)
+![Admin Users](static/screenshots/admin-back-packs.png)
+
+---
+
+### 🖼️ Front-End CRUD Screenshots (Admin Tools)
+
+These screenshots show the admin-facing CRUD actions available directly on the front-end interface.
+
+![Front-End Add Pack](static/screenshots/frontend-add-pack.png)
+![Front-End Edit Pack](static/screenshots/front-end-create.png)
+
 ---
 
 These admin features ensure the platform remains easy to maintain, scalable, and fully controllable by staff users and superuser supporting long‑term growth and content expansion.
