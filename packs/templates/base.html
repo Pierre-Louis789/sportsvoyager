@@ -49,7 +49,7 @@ html, body {
 }
 
 .main-content {
-    flex: 1;
+    flex: 1 0 auto;
 }
 
 
@@ -274,6 +274,15 @@ html, body {
     color: var(--gold);
 }
 
+.unlock-section {
+    min-height: 55vh;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 /* =========================================
    CARDS (GLASS + HOVER)
 ========================================= */
@@ -306,6 +315,11 @@ html, body {
     color: var(--gold);
     font-size: 0.95rem;
     padding-left: 18px;
+}
+
+.card-premium strong {
+    color: var(--gold);
+    font-weight: 700;
 }
 
 .card-pack {
@@ -745,10 +759,11 @@ html, body {
 .footer-premium {
     background: rgba(15, 23, 42, 0.4);
     border-top: 1px solid rgba(148,163,184,0.25);
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     backdrop-filter: blur(12px);
     margin-top: auto;
+    flex-shrink: 0;
 }
 
 .footer-tagline {

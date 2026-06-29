@@ -79,7 +79,8 @@
     <div class="{% if unlocked or not pack.is_premium %}col-md-9{% else %}col-md-12{% endif %} fade-up delay-2">
 
         {% if not unlocked and pack.is_premium %}
-
+        
+        <div class="unlock-section">
             <!-- ========================= -->
             <!-- LOCKED VERSION -->
             <!-- ========================= -->
@@ -117,7 +118,7 @@
                     Unlock Full Pack 🔓
                 </a>
             </div>
-
+        </div>
 
         {% else %}
 
