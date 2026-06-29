@@ -17,7 +17,7 @@
     <a href="{% url 'pack_create' %}" class="btn-hero-primary mb-4">Add New Pack</a>
 {% endif %}
 
-<br>
+
 
 <!-- PACK GRID -->
 <div class="row g-4">
@@ -26,9 +26,9 @@
             <div class="card-pack h-100">
 
                 {% if pack.image_name %}
-                    <img src="{% static 'packs/' %}{{ pack.image_name }}" class="pack-img" alt="{{ pack.title }}">
+                    <img src="{% static 'packs/' %}{{ pack.image_name }}" class="pack-img" alt="{{ pack.title }}" aria-label="{{ pack.title }}">
                 {% else %}
-                    <img src="{% static 'images/pack-default.jpg' %}" class="pack-img" alt="{{ pack.title }}">
+                    <img src="{% static 'images/pack-default.jpg' %}" class="pack-img" alt="{{ pack.title }}" aria-label="{{ pack.title }}">
                 {% endif %}
 
 
