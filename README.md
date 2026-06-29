@@ -1946,9 +1946,9 @@ You can access the deployed version of Sports Voyager here:
 ### GitHub Repository
 The full source code is available on GitHub:
 
-🔗 **GitHub Repository:** `https://github.com/Pierre-Louis789/sportsvoyager`
+🔗 **GitHub Repository:** https://github.com/Pierre-Louis789/sportsvoyager
 
 **Developer Profile**
 Created by Pierre-Louis - view my Github profile :
 
- `https://github.com/Pierre-Louis789`
+ https://github.com/Pierre-Louis789
