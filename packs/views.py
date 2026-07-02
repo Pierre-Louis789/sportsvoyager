@@ -222,6 +222,10 @@ def create_checkout_session(request, pk):
         cancel_url=request.build_absolute_uri(
             reverse('pack_detail', args=[pack.pk])
         ),
+        metadata={
+            'user_id': request.user.id,
+            'pack_id': pack.id
+        }
     )
 
     return JsonResponse({'id': session.id})
