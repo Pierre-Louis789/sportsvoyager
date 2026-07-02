@@ -4,7 +4,7 @@ import stripe
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from packs.models import Unlock, Pack
+from packs.models import Unlockedpack, Pack
 from django.contrib.auth.models import User
 
 
@@ -30,6 +30,6 @@ def stripe_webhook_view(request):
         user = User.objects.get(id=user_id)
         pack = Pack.objects.get(id=pack_id)
 
-        Unlock.objects.get_or_create(user=user, pack=pack)
+        Unlockedpack.objects.get_or_create(user=user, pack=pack)
 
     return HttpResponse(status=200)
