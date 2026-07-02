@@ -468,6 +468,26 @@ Sports Voyager provides a smooth, intuitive experience for all users, whether br
 - Stripe payments handled externally for maximum security.
 
 ---
+### 📧 Email Confirmation (Console Backend)
+
+After a successful payment, Sports Voyager sends a confirmation email to the user.  
+This is implemented using Django’s console email backend, which prints the email content to the terminal during development.  
+This satisfies the MS4 requirement for email functionality without needing a live SMTP provider.  
+The email includes the pack name, confirmation message, and a friendly thank‑you note.
+
+```
+request.user.email_user(
+    subject=f"Your purchase: {pack.title}",
+    message=(
+        f"Hi {request.user.username},\n\n"
+        f"You have successfully unlocked the pack: {pack.title}.\n"
+        "Enjoy your trip planning!\n\n"
+        "Sports Voyager"
+    )
+)
+```
+
+---
 
 Sports Voyager ensures users can browse, unlock, and access football travel content easily and securely, with a premium UX designed for real‑world travel scenarios.
 
