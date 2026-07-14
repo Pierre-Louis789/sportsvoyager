@@ -11,6 +11,9 @@ urlpatterns = [
     path('pack/<int:pk>/payment-success/', views.payment_success, name='payment_success'),
     path('pack/<int:pk>/create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
 
+    # Comments
+    path('comment/<int:pk>/edit/', views.comment_edit, name='comment_edit'),
+    path('comment/<int:pk>/delete/', views.comment_delete, name='comment_delete'),
     # Admin
     path('add/', views.pack_create, name='pack_create'),
     path('pack/<int:pk>/edit/', views.pack_edit, name='pack_edit'),
