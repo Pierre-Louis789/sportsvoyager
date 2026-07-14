@@ -1,8 +1,24 @@
-# 🏟️ Sports Voyager — Your Football Travel Companion
+# 🏟️ Sports Voyager — Football - Travel Website
 
-Sports Voyager is a modern football‑travel companion built to help fans plan unforgettable match‑day trips with clarity, confidence, and insider knowledge. The platform provides curated travel packs for Europe’s greatest football cities, complete with stadium guides, match‑day itineraries, local tips, safety notes, and booking links, all presented through a clean interface.
 
-Users can browse free travel packs, unlock premium guides through secure Stripe payments, manage their profile, and access structured itineraries designed specifically for football travellers. Sports Voyager combines premium UX, reliable performance, and real‑world practicality to deliver a seamless trip‑planning experience.
+Sports Voyager is a full‑stack football‑travel platform designed to help fans plan unforgettable match‑day weekends across Europe. Instead of relying on generic travel websites, Sports Voyager provides **curated, football‑specific travel packs** that give supporters everything they need for a smooth, confident trip, all in one place.
+
+Each travel pack includes:
+
+- Stadium guides and seating insights  
+- Match‑day itineraries  
+- Local food, nightlife, and neighbourhood recommendations  
+- Transport routes from airport → city → stadium  
+- Safety notes and emergency contacts  
+- Booking links for flights, hotels, and match tickets  
+- Premium insider content for registered users  
+
+The platform offers both **free** and **premium** packs. Premium guides are unlocked through **secure Stripe Checkout payments**, with a fully implemented **webhook validation system** ensuring purchased content is delivered instantly and reliably. Users can create an account, manage their profile, comment on packs, and revisit unlocked guides at any time.
+
+Sports Voyager is built with a **mobile‑first, premium UX**, making it ideal for fans who need quick navigation while travelling. The site is fully responsive, accessible, and optimized for performance, delivering a fast, reliable, real‑world trip‑planning experience.
+
+In short, Sports Voyager acts as a **football‑focused travel assistant**, combining curated content, secure payments, and a polished interface to help supporters plan the perfect weekend away, confidently, quickly, and without the usual travel confusion.
+
 
 
 ---
@@ -303,7 +319,7 @@ Wireframes ensured the final product remained aligned with the original UX visio
 
 ##  UI Screenshots
 
-The following screenshots showcase the final user interface of Sports Voyager. They highlight the clean, mobile‑first design, premium visual identity, and structured layout that evolved from the original wireframes. These images demonstrate how the planned concepts were transformed into a polished, responsive, and accessible user experience.
+The following screenshots showcase the final user interface of Sports Voyager. They highlight the clean, mobile‑first design, premium visual identity, and structured layout that evolved from the original wireframes. These images demonstrate how the planned concepts were transformed into a polished, responsive, and accessible user experience. 
 
 ### 📱 Homepage
 The homepage presents a bold hero section, clear call‑to‑action buttons, and a premium gold‑on‑dark theme that sets the tone for the entire platform.
@@ -332,7 +348,7 @@ The profile page allows users to update their favourite team, country, and avata
 ![Profile Page](static/screenshots/profile.png)
 
 ### 📱 Mobile Responsiveness
-Sports Voyager was designed mobile‑first. These screenshots show how the layout adapts across phones, tablets, and desktops without losing clarity or usability.
+Sports Voyager was designed for all screen sizes. These screenshots show how the layout adapts across phones, tablets, and desktops without losing clarity or usability.
 
 ![Responsiveness](static/screenshots/responsiveness.png)
 
@@ -357,7 +373,7 @@ Sports Voyager delivers a polished, football‑focused travel experience built a
 - Automatic unlock after successful payment — no waiting, no manual refresh.
 - Stripe webhooks validate payments and ensure safe, reliable access.
 
-### 📱 3. Mobile‑First, Responsive UI
+### 📱 3.Responsive UI
 - Designed primarily for mobile travellers using the site on the go.
 - Large tap areas, simplified layouts, and fast-loading pages.
 - Fully responsive across phones, tablets, and desktops.

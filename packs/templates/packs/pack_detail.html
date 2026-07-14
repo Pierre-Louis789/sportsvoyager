@@ -294,6 +294,13 @@
                     <small class="text-gold">
                         Posted by {{ comment.user.username }} on {{ comment.created_at|date:"M d, Y H:i" }}
                     </small>
+                    
+                    {% if request.user == comment.user %}
+                        <div class="mt-2">
+                            <a href="{% url 'comment_edit' comment.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
